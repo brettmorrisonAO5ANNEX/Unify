@@ -28,6 +28,11 @@ namespace Unify
             InitializeComponent();
         }
 
+        /* TODO: create wallpaper maker tab
+         * - for this PC (fetch dimensions)
+         * - for another PC (input dimensions)
+         * - choose filter
+         */
         private void LoadFile_Click(object sender, RoutedEventArgs e)
         {
             //load image
@@ -40,19 +45,9 @@ namespace Unify
             if (filePath != null)
             {
                 var img = Cv2.ImRead(filePath);
-                var img_result = Pixelate(img, 8);
+                var img_result = BasicProcessing.Pixelate(img, 8, new OpenCvSharp.Size(1920, 1200));
                 SaveImage(img_result);
             }
-        }
-
-        private Mat Pixelate(Mat input, int pixel_size)
-        {
-            var dimensions = input.Size();
-            var downsized_img = new Mat();
-            Cv2.Resize(input, downsized_img, new OpenCvSharp.Size(dimensions.Width / pixel_size, dimensions.Height / pixel_size), interpolation:InterpolationFlags.Nearest);
-            var pixelated_img = new Mat();
-            Cv2.Resize(downsized_img, pixelated_img, new OpenCvSharp.Size(1920, 1200), interpolation: InterpolationFlags.Nearest);
-            return pixelated_img;
         }
 
         private void SaveImage(Mat img)
