@@ -27,7 +27,7 @@ namespace Unify
             var downsized_img = new Mat();
             Cv2.Resize(input, downsized_img, new OpenCvSharp.Size(dimensions.Width / pixel_size, dimensions.Height / pixel_size), interpolation: InterpolationFlags.Nearest);
             var pixelated_img = new Mat();
-            Cv2.Resize(downsized_img, pixelated_img, new OpenCvSharp.Size(1920, 1200), interpolation: InterpolationFlags.Nearest);
+            Cv2.Resize(downsized_img, pixelated_img, output_dimensions, interpolation: InterpolationFlags.Nearest);
             return pixelated_img;
         }
 
