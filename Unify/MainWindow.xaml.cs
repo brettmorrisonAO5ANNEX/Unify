@@ -45,7 +45,7 @@ namespace Unify
             if (filePath != null)
             {
                 var img = Cv2.ImRead(filePath);
-                var img_result = BasicProcessing.Pixelate(img, 8, new OpenCvSharp.Size(1920, 1200));
+                var img_result = BasicProcessing.Pixelate(img, new List<object>() { 8, 1920, 1200 });
                 SaveImage(img_result);
             }
         }
