@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Unify"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="LoadFile" Content="Load File" Width="80" Height="28" Click="LoadFile_Click"/>
+        Title="MainWindow" MinWidth="960" MinHeight="640" MaxWidth="960" MaxHeight="640">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="480"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Image Source="C:\Users\brett\source\repos\Unify\Unify\GUI assets\unify_logo.png" Grid.Row="0" Stretch="UniformToFill" Margin="4,4,4,4"/>
+            <GroupBox Header="Settings" Background="White" Grid.Row="1" Margin="4,4,4,4">
+                <!--TODO-->
+            </GroupBox>
+            <GroupBox Header="Upload Image" Background="White" Grid.Row="2" Margin="4,4,4,4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="FilePath" Text="- file name -" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Grid.Column="0" Margin="4,4,4,4"/>
+                    <Button Content="Browse" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Width="100" Margin="4,4,4,4" Click="BrowseFiles"/>
+                    <Button Content="Run" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Grid.Column="2" Margin="4,4,4,4" Click="RunApp"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <GroupBox Header="Input" Background="White" Grid.Row="0" Grid.Column="1" Margin="4,4,4,4">
+            <Image x:Name="InputImage" Margin="4,4,4,4"/>
+        </GroupBox>
+        <GroupBox Header="Output" Background="White" Grid.Row="1" Grid.Column="1" Margin="4,4,4,4">
+            <Image x:Name="OutputImage" Margin="4,4,4,4"/>
+        </GroupBox>
     </Grid>
 </Window>
