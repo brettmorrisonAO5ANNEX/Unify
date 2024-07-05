@@ -53,15 +53,10 @@ namespace Unify
             //test
             if (_input != null)
             {
-                _output = BasicProcessing.ApplyBasicFilter(BasicFilter.Pixelate, _input, new object[] { 40, _input.Width, _input.Height });
-                DisplayResults();
+                var img = Cv2.ImRead(filePath);
+                var img_result = BasicProcessing.Pixelate(img, 8, new OpenCvSharp.Size(1920, 1200));
+                SaveImage(img_result);
             }
-        }
-
-        private void DisplayResults()
-        {
-            InputImage.Source = OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(_input);
-            OutputImage.Source = OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(_output);
         }
 
         private void SaveImage(Mat img)
