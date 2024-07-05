@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using OpenCvSharp;
+using OpenCvSharp.WpfExtensions;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unify.classes;
 
 namespace Unify
 {
@@ -23,31 +26,42 @@ namespace Unify
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
+        private string _filePath { get; set; }
+        private Mat _input {  get; set; }
+        private Mat _output { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        /* TODO: create wallpaper maker tab
-         * - for this PC (fetch dimensions)
-         * - for another PC (input dimensions)
-         * - choose filter
-         */
-        private void LoadFile_Click(object sender, RoutedEventArgs e)
+        private void BrowseFiles(object sender, RoutedEventArgs e)
         {
-            //load image
-            string filePath;
             var dialog = new OpenFileDialog();
             bool? result = dialog.ShowDialog();
-            filePath = (bool)result ? dialog.FileName : null;
+            _filePath = (bool)result ? dialog.FileName : null;
 
-            //process and save image
-            if (filePath != null)
+            if (_filePath != null)
             {
-                var img = Cv2.ImRead(filePath);
-                var img_result = BasicProcessing.Pixelate(img, 8, new OpenCvSharp.Size(1920, 1200));
-                SaveImage(img_result);
+                FilePath.Text = System.IO.Path.GetFileName(_filePath);
+                _input = Cv2.ImRead(_filePath);
             }
+        }
+
+        private void RunApp(object sender, RoutedEventArgs e)
+        {
+            //test
+            if (_input != null)
+            {
+                _output = BasicProcessing.ApplyBasicFilter(BasicFilter.Pixelate, _input, new object[] { 40, _input.Width, _input.Height });
+                DisplayResults();
+            }
+        }
+
+        private void DisplayResults()
+        {
+            InputImage.Source = OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(_input);
+            OutputImage.Source = OpenCvSharp.WpfExtensions.BitmapSourceConverter.ToBitmapSource(_output);
         }
 
         private void SaveImage(Mat img)

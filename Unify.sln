@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unify", "Unify\Unify.csproj", "{E27DE046-8AD3-450D-85DD-36A296E6C98C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unify", "Unify\Unify.csproj", "{E27DE046-8AD3-450D-85DD-36A296E6C98C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

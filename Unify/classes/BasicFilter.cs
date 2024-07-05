@@ -26,12 +26,11 @@ namespace Unify.classes
         /// <param name="output_dimensions">the dimensions to size up to</param>
         /// <returns>a pixelated version of the input image</returns>
         //public static Mat Pixelate(Mat input, int pixel_size, OpenCvSharp.Size output_dimensions)
-        public static Mat Pixelate(Mat input, string[] args)
+        public static Mat Pixelate(Mat input, object[] args)
         {
             //parse args
-            var args_parsed = ParseArgs(args);
-            int pixel_size = (int)args_parsed[0];
-            Size output_dimensions = new Size((int)args_parsed[1], (int)args_parsed[2]);
+            int pixel_size = (int)args[0];
+            Size output_dimensions = new Size((int)args[1], (int)args[2]);
 
             //apply filter
             var dimensions = input.Size();
@@ -40,16 +39,6 @@ namespace Unify.classes
             var pixelated_img = new Mat();
             Cv2.Resize(downsized_img, pixelated_img, output_dimensions, interpolation: InterpolationFlags.Nearest);
             return pixelated_img;
-        }
-
-        private static List<object> ParseArgs(string[] args)
-        {
-            var result = new List<object>();
-            foreach (var arg in args)
-            {
-                //TODO: parse object and add it to result
-            }
-            return result;
         }
     }
 }
